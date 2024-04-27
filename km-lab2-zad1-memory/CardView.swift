@@ -25,9 +25,9 @@ struct CardView: View {
                 .fill(.blue)
                 .opacity(isFaceUp ? 0 : 1)
             
-        }.onTapGesture() {
-            isFaceUp = !isFaceUp
         }
+        .onTapGesture() { isFaceUp = !isFaceUp }
+        .aspectRatio(2.0/3.0, contentMode: .fill)
     }
 }
 

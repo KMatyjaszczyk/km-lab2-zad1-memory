@@ -9,21 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     let emojis = ["🐵", "🐸", "🐶", "🐱", "🦊", "🐨", "🐭", "🐹", "🐰", "🐻"]
-    @State var cardsCount = 4
+    @State var cardsCount = 10
     var body: some View {
         VStack {
+            title
+            Spacer()
             cardDisplay
-            cardNumberAdjuster
+            // cardNumberAdjuster
+            themeButtons
         }.padding()
         
     }
     
+    var title: some View {
+        Text("Memo").font(.largeTitle)
+    }
+    
     var cardDisplay: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0 ..< cardsCount, id: \.self) { i in
-                CardView(content: emojis[i])
-            }
-        }.foregroundColor(.blue)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+                ForEach(0 ..< cardsCount, id: \.self) { i in
+                    CardView(content: emojis[i])
+                }
+            }.foregroundColor(.blue)
+        }
+        
     }
     
     var cardNumberAdjuster: some View {
@@ -40,6 +50,16 @@ struct ContentView: View {
             label: { Image(systemName: symbol).font(.largeTitle) }
         ).disabled(cardsCount + offset < 2
                    || cardsCount + offset >= emojis.count)
+    }
+    
+    var themeButtons: some View {
+        HStack {
+            ThemeButton(icon: "cloud.sun.fill", label: "Motyw 1")
+            Spacer()
+            ThemeButton(icon: "graduationcap.fill", label: "Motyw 2")
+            Spacer()
+            ThemeButton(icon: "soccerball", label: "Motyw 3")
+        }
     }
 }
 
