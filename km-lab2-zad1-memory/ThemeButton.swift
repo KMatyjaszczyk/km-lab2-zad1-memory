@@ -10,19 +10,21 @@ import SwiftUI
 struct ThemeButton: View {
     let icon: String
     let label: String
+    let colorToChange: Color
+    @Binding var themeColor: Color
     var body: some View {
         Button(
-            action: {},
+            action: { themeColor = colorToChange },
             label: {
                 VStack {
-                    Image(systemName: icon)
+                    Image(systemName: icon).font(.title)
                     Text(label)
-                }
+                }.foregroundColor(themeColor)
             }
         )
     }
 }
 
 #Preview {
-    ThemeButton(icon: "cloud.sun.fill", label: "Motyw")
+    ThemeButton(icon: "cloud.sun.fill", label: "Motyw", colorToChange: Color.red, themeColor: .constant(Color.blue))
 }

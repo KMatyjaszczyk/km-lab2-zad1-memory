@@ -10,6 +10,7 @@ import SwiftUI
 struct CardView: View {
     let content: String
     @State var isFaceUp: Bool = true
+    @Binding var themeColor: Color
     var body: some View {
         let rectangle = RoundedRectangle(cornerRadius: 12)
         ZStack {
@@ -17,12 +18,12 @@ struct CardView: View {
                 rectangle.fill(.white)
                 rectangle
                     .strokeBorder(style: StrokeStyle(lineWidth: 2))
-                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(themeColor)
                 Text(content).font(.largeTitle)
                 
             }.opacity(isFaceUp ? 1 : 0)
             rectangle
-                .fill(.blue)
+                .fill(themeColor)
                 .opacity(isFaceUp ? 0 : 1)
             
         }
@@ -32,5 +33,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(content: "😂")
+    CardView(content: "😂", themeColor: .constant(Color.red))
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     let emojis = ["🐵", "🐸", "🐶", "🐱", "🦊", "🐨", "🐭", "🐹", "🐰", "🐻"]
     @State var cardsCount = 10
+    @State var themeColor = Color.blue
     var body: some View {
         VStack {
             title
@@ -29,7 +30,7 @@ struct ContentView: View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
                 ForEach(0 ..< cardsCount, id: \.self) { i in
-                    CardView(content: emojis[i])
+                    CardView(content: emojis[i], themeColor: self.$themeColor)
                 }
             }.foregroundColor(.blue)
         }
@@ -54,11 +55,11 @@ struct ContentView: View {
     
     var themeButtons: some View {
         HStack {
-            ThemeButton(icon: "cloud.sun.fill", label: "Motyw 1")
+            ThemeButton(icon: "cloud.sun.fill", label: "Motyw 1", colorToChange: Color.blue, themeColor: self.$themeColor)
             Spacer()
-            ThemeButton(icon: "graduationcap.fill", label: "Motyw 2")
+            ThemeButton(icon: "graduationcap.fill", label: "Motyw 2", colorToChange: Color.red, themeColor: self.$themeColor)
             Spacer()
-            ThemeButton(icon: "soccerball", label: "Motyw 3")
+            ThemeButton(icon: "soccerball", label: "Motyw 3", colorToChange: Color.green, themeColor: self.$themeColor)
         }
     }
 }
